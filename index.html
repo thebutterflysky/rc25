@@ -3,63 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>HSNU RED CROSS</title>
   <style>
-  
-  body {
-  margin: 0;
-  background-color: #f4f1ed;
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif;
-}
-  
-  .banner {
-  width: 100%;
-  height: auto;
-}
+    * { box-sizing: border-box; }
 
-.content {
-  padding: 24px;
-  text-align: center;
-}
+    body {
+      margin: 0;
+      min-height: 100svh;
+      background: #f4f1ed;
+      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif;
+    }
 
-.links {
-  display: grid;
-  gap: 14px;
-  margin-top: 24px;
-}
+    .page {
+      width: min(100%, 480px);
+      margin: 0 auto;
+    }
 
-.links a {
-    padding: 16px 20px;
-    text-align: center;
-    width: 100%;
-    background-color: #e29569;
-    display: block;
-    border-radius: 14px;
+    .banner {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-color: #222;
+    .content {
+      padding: 24px;
+      text-align: center;
+    }
 
-text-decoration: none;
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 8vw, 40px);
+      letter-spacing: .03em;
+    }
 
-font-weight: 700;
-box-sizing: border-box;
-}
+    .subtitle {
+      margin: 8px 0 0;
+      color: #6f625c;
+      font-size: 15px;
+    }
 
+    .links {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .links a {
+      display: block;
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: #e29569;
+      color: #222;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform .12s ease, filter .12s ease;
+    }
+
+    .links a:active {
+      transform: scale(.98);
+      filter: brightness(.96);
+    }
+
+    .vital-sign {
+      margin-top: 26px;
+    }
+
+    #ecgSvg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    #ecgWave,
+    #atriaImageLayer,
+    #ventImageLayer {
+      will-change: transform;
+    }
+
+    .footer-note {
+      margin: 10px 0 0;
+      color: #8a7770;
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
   </style>
 </head>
 
 <body>
-<main>
-<img class="banner" src="banner.png" alt="橫幅">
-<section class="content">
-<h1>HSNU RED CROSS</h1>
-<p>附中紅十字</p>
-<div class="links">
-    <a href="https://www.instagram.com/hsnu__rc25?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">會帳IG</a>
-    <a href="https://line.me/ti/g2/oMBOlBPfqQcv-ePQ41PsWyDFzzl3X5BDNaoqNQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default">Line新生群</a>
-</div>
-</section>
-</main>
+  <main class="page">
+    <img class="banner" src="banner.png" alt="HSNU Red Cross 橫幅">
 
+    <section class="content">
+      <h1>HSNU RED CROSS</h1>
+      <p class="subtitle">附中紅十字會</p>
+
+      <div class="links">
+        <a href="https://www.instagram.com/hsnu__rc25/">會帳 IG</a>
+        <a href="https://line.me/ti/g2/oMBOlBPfqQcv-ePQ41PsWyDFzzl3X5BDNaoqNQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default">LINE 新生群</a>
+      </div>
+
+      <div class="vital-sign">
+        <svg id="ecgSvg" viewBox="0 0 350 250" aria-label="動態心臟與心電圖">
+          <g id="heartGroup" transform="translate(75,28) rotate(-8)">
+            <g id="atriaImageLayer" transform="translate(100,133)">
+              <image href="atria_refined.png" x="-95" y="-105" width="190" height="210" opacity=".95"></image>
+            </g>
+
+            <g id="ventImageLayer" transform="translate(100,120)">
+              <image href="ventricles.png" x="-95" y="-105" width="190" height="210" opacity=".95"></image>
+            </g>
+          </g>
+
+          <g id="ecg" transform="translate(0,105)">
+            <g id="ecgWave">
+              <polyline
+                points="0,30 20,30 28,25 36,30 55,30 62,34 68,10 74,42 82,30 115,30 132,22 150,30 180,30"
+                fill="none"
+                stroke="#ff4d6d"
+                stroke-width="3"
+                stroke-linejoin="round"
+                stroke-linecap="round">
+              </polyline>
+
+              <polyline
+                points="0,30 20,30 28,25 36,30 55,30 62,34 68,10 74,42 82,30 115,30 132,22 150,30 180,30"
+                transform="translate(180,0)"
+                fill="none"
+                stroke="#ff4d6d"
+                stroke-width="3"
+                stroke-linejoin="round"
+                stroke-linecap="round">
+              </polyline>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <p class="footer-note">HSNURC · EST. 2026</p>
+    </section>
+  </main>
+
+  <script>
+    const atriaImageLayer = document.getElementById("atriaImageLayer");
+    const ventImageLayer = document.getElementById("ventImageLayer");
+    const ecgWave = document.getElementById("ecgWave");
+
+    const bpm = 70;
+    const beatDuration = 60 / bpm;
+
+    let phase = 0;
+    let lastTime = performance.now();
+
+    function animate(now) {
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
+      phase = (phase + dt / beatDuration) % 1;
+
+      let atriaScale = 1;
+      let ventScale = 1;
+
+      if (phase < .2) {
+        const p = phase / .2;
+        const pulse = Math.sin(p * Math.PI);
+        atriaScale = 1 - .045 * pulse;
+        ventScale = 1 + .02 * pulse;
+      } else if (phase < .3) {
+        ventScale = 1.025;
+      } else if (phase < .6) {
+        const p = (phase - .3) / .3;
+        ventScale = 1 - .055 * Math.sin(p * Math.PI);
+      }
+
+      atriaImageLayer.setAttribute(
+        "transform",
+        `translate(100,133) scale(${atriaScale})`
+      );
+
+      ventImageLayer.setAttribute(
+        "transform",
+        `translate(100,120) scale(${ventScale})`
+      );
+
+      ecgWave.setAttribute(
+        "transform",
+        `translate(${-180 * phase},0)`
+      );
+
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  </script>
 </body>
 </html>
